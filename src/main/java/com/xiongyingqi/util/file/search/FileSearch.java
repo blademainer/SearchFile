@@ -1,5 +1,7 @@
 package com.xiongyingqi.util.file.search;
 
+import com.xiongyingqi.util.EntityHelper;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -177,14 +179,14 @@ public class FileSearch implements FileSearchObserver {
             System.out.println(baseFolder);
             FileSearch fileSearch = new FileSearch(baseFolder);
             fileSearch.addObserver(fileSearch);
-            fileSearch.addKeyword("你妹");
+            fileSearch.addKeyword("罗光华");
+            fileSearch.addKeyword("江铜");
             fileSearch.startSearch();
 //        }
     }
 
     @Override
     public void findFile(FileSearchResult result) {
-        System.out.println("findFile ========== " + result.getFile());
-        System.out.println("marks ========== " + result.getFileSearchResultMarks());
+        EntityHelper.print(result);
     }
 }

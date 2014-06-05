@@ -13,6 +13,9 @@ public class FileNameHandler implements IFileHandler {
     @Override
     public boolean supportFileHandler(FileHandler fileHandler) {
 //        System.out.println(" ------------ FileNameHandler --------------- ");
+        if (fileHandler.getCurrentFile() == null || fileHandler.getFileSearch().getKeywords() == null) {
+            return false;
+        }
         Collection<String> keywords = fileHandler.getFileSearch().getKeywords();
         String fileName = fileHandler.getCurrentFile().getName();
         for (String keyword : keywords) {

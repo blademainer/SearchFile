@@ -15,10 +15,10 @@ import java.util.*;
 public class TextFileHandler implements IFileHandler {
     @Override
     public boolean supportFileHandler(FileHandler fileHandler) {
-        if(fileHandler.getCurrentFile() == null){
+        if (fileHandler.getCurrentFile() == null || fileHandler.getFileSearch().getKeywords() == null) {
             return false;
         }
-        if(fileHandler.getCurrentFile().getName().endsWith("txt")){
+        if (fileHandler.getCurrentFile().getName().endsWith("txt")) {
             return true;
         }
         return false;
@@ -36,19 +36,19 @@ public class TextFileHandler implements IFileHandler {
             try {
                 int lineNumber = 0;
                 String line = null;
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     Collection<FileSearchResultMark> fileSearchResultMarks = columnNumbersOfKeywords(fileHandler, line, lineNumber);
 
-                    if(fileSearchResultMarks != null && fileSearchResultMarks.size() > 0){
-                        if(result == null){
+                    if (fileSearchResultMarks != null && fileSearchResultMarks.size() > 0) {
+                        if (result == null) {
                             result = new FileSearchResult();
                         }
 
                         Collection<FileSearchResultMark> marks = result.getFileSearchResultMarks();
-                        if(marks == null){
+                        if (marks == null) {
                             marks = new HashSet<FileSearchResultMark>();
                         }
-                        if(fileSearchResultMarks != null){
+                        if (fileSearchResultMarks != null) {
                             marks.addAll(fileSearchResultMarks);
                             result.setFileSearchResultMarks(marks);
                             result.setFoundResult(result.getFoundResult() + fileSearchResultMarks.size());
@@ -75,7 +75,7 @@ public class TextFileHandler implements IFileHandler {
         return result;
     }
 
-    public Collection<FileSearchResultMark> columnNumbersOfKeywords(FileHandler fileHandler, String line, int lineNumber){
+    public Collection<FileSearchResultMark> columnNumbersOfKeywords(FileHandler fileHandler, String line, int lineNumber) {
         Collection<String> keywords = fileHandler.getFileSearch().getKeywords();
         Map<String, Integer> keywordIndexMap = new HashMap<String, Integer>();
         Collection<FileSearchResultMark> fileSearchResultMarks = new ArrayList<FileSearchResultMark>();
@@ -85,15 +85,15 @@ public class TextFileHandler implements IFileHandler {
         for (String keyword : keywords) {
             System.out.println("keyword ====== " + keyword);
             int index;
-            if(keywordIndexMap.get(keyword) == null){
+            if (keywordIndexMap.get(keyword) == null) {
                 keywordIndexMap.put(keyword, 0);
             }
 
-            while((index = keywordIndexMap.get(keyword)) >= 0){
+            while ((index = keywordIndexMap.get(keyword)) >= 0) {
                 index = line.indexOf(keyword, index);
                 System.out.println("index ======= " + index);
                 keywordIndexMap.put(keyword, index + keyword.length());
-                if(index >= 0){
+                if (index >= 0) {
                     FileSearchResultMark fileSearchResultMark = new FileSearchResultMark();
                     fileSearchResultMark.setColumn(index);
                     fileSearchResultMark.setRow(lineNumber);
