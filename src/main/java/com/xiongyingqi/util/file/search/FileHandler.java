@@ -43,7 +43,7 @@ public class FileHandler implements Runnable {
         do {
             try {
                 file = FileSearch.BLOCKING_QUEUE.poll(5, TimeUnit.SECONDS);
-                System.out.println(file);
+//                System.out.println(file);
                 if(file == null){
                     continue;
                 }
@@ -101,5 +101,13 @@ public class FileHandler implements Runnable {
 
     public void setCurrentFile(File currentFile) {
         this.currentFile = currentFile;
+    }
+
+    public static Collection<IFileHandler> getFileHandlers() {
+        return fileHandlers;
+    }
+
+    public static void setFileHandlers(Collection<IFileHandler> fileHandlers) {
+        FileHandler.fileHandlers = fileHandlers;
     }
 }

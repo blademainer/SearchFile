@@ -1,10 +1,13 @@
 package com.xiongyingqi.util.file.search;
 
 import com.xiongyingqi.util.EntityHelper;
+import com.xiongyingqi.util.file.search.handler.FileNameHandler;
+import com.xiongyingqi.util.file.search.result.ResultDeleteFile;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -173,16 +176,22 @@ public class FileSearch implements FileSearchObserver {
 //        while (i < 10){
 //            System.out.println(i++);
 //        }
-        File baseFolder = new File("C:\\Users\\瑛琪\\Desktop");
-//        File[] files = File.listRoots();
-//        for (File file : files) {
-            System.out.println(baseFolder);
-            FileSearch fileSearch = new FileSearch(baseFolder);
-            fileSearch.addObserver(fileSearch);
-            fileSearch.addKeyword("罗光华");
-            fileSearch.addKeyword("江铜");
+//        File baseFolder = new File("D:\\");
+
+        List<IFileHandler> handlers = new ArrayList<IFileHandler>();
+        handlers.add(new FileNameHandler());
+        FileHandler.setFileHandlers(handlers);
+
+        File[] files = File.listRoots();
+        for (File file : files) {
+//            System.out.println(baseFolder);
+
+            FileSearch fileSearch = new FileSearch(file);
+            ResultDeleteFile deleteFile = new ResultDeleteFile();
+            fileSearch.addObserver(deleteFile);
+            fileSearch.addKeyword(".DS_Store");
             fileSearch.startSearch();
-//        }
+        }
     }
 
     @Override

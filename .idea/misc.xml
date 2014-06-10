@@ -33,9 +33,6 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7 x64" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
-  <component name="SvnConfiguration" myUseAcceleration="nothing">
-    <configuration>C:\Users\瑛琪\AppData\Roaming\Subversion</configuration>
-  </component>
   <component name="masterDetails">
     <states>
       <state key="GlobalLibrariesConfigurable.UI">

@@ -81,9 +81,7 @@ public class TextFileHandler implements IFileHandler {
         Collection<FileSearchResultMark> fileSearchResultMarks = new ArrayList<FileSearchResultMark>();
 //        int lastIndex = index;
 
-        System.out.println("line ====== " + line);
         for (String keyword : keywords) {
-            System.out.println("keyword ====== " + keyword);
             int index;
             if (keywordIndexMap.get(keyword) == null) {
                 keywordIndexMap.put(keyword, 0);
@@ -91,7 +89,6 @@ public class TextFileHandler implements IFileHandler {
 
             while ((index = keywordIndexMap.get(keyword)) >= 0) {
                 index = line.indexOf(keyword, index);
-                System.out.println("index ======= " + index);
                 keywordIndexMap.put(keyword, index + keyword.length());
                 if (index >= 0) {
                     FileSearchResultMark fileSearchResultMark = new FileSearchResultMark();
