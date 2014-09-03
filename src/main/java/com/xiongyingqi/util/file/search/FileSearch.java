@@ -190,7 +190,7 @@ public class FileSearch implements FileSearchObserver {
             FileSearch fileSearch = new FileSearch(file);
             ResultCopyFile resultCopyFile = new ResultCopyFile();
             fileSearch.addObserver(resultCopyFile);
-            fileSearch.addKeyword("张文豪");
+            fileSearch.addKeyword("租赁测算");
             fileSearch.startSearch();
 //        }
     }
